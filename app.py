@@ -1,5 +1,4 @@
 import streamlit as st
-from geopy.geocoders import Nominatim
 
 # --- Mock Localizer ---
 def mock_localize_with_gpt(prompt, region, language, education_level):
@@ -14,7 +13,7 @@ def mock_localize_with_gpt(prompt, region, language, education_level):
     return f"""[MOCK LOCALIZATION]\nTarget Language: {language}\nRegion: {region}\nEducation Level: {education_level}\n\nLocalized Summary:\n{prompt}\n\n{fallback}"""
 
 # --- Civic Data ---
-def civic_data_lookup(topic, region):
+def civic_data_lookup(topic, country):
     mock_civic_database = {
         "India": {
             "education": "India's NEP 2020 aims to make education more localized, flexible, and multidisciplinary."
@@ -26,7 +25,6 @@ def civic_data_lookup(topic, region):
             "education": "The Every Student Succeeds Act emphasizes local control and equity in K–12 education."
         }
     }
-    country = region.get("country", "Unknown")
     topic_data = mock_civic_database.get(country, {}).get(topic.lower())
     return topic_data or f"No civic data available for {topic} in {country}."
 
@@ -42,6 +40,8 @@ LANGUAGE_OPTIONS = {
     "Arabic": "ar"
 }
 
+COUNTRY_OPTIONS = ["India", "Mexico", "USA"]
+
 with st.form("localization_form"):
     st.subheader("1. Input your AI Summary")
     summary = st.text_area("Enter the AI-generated summary you'd like to localize:")
@@ -54,27 +54,19 @@ with st.form("localization_form"):
     with cols[1]:
         education = st.selectbox("Education Level", ["basic", "intermediate", "advanced"])
 
-    st.subheader("3. Set Your Location (or leave default)")
-    coords = st.columns(2)
-    with coords[0]:
-        lat = st.number_input("Latitude", value=28.6139)
-    with coords[1]:
-        lon = st.number_input("Longitude", value=77.2090)
+    st.subheader("3. Select Your Country")
+    country = st.selectbox("Country", COUNTRY_OPTIONS)
 
     submitted = st.form_submit_button("Localize Summary")
 
 if submitted:
     try:
-        geolocator = Nominatim(user_agent="localisense-streamlit")
-        location = geolocator.reverse((lat, lon), language='en', timeout=10)
-        region = location.raw['address']
-
-        civic_context = civic_data_lookup("education", region)
+        civic_context = civic_data_lookup("education", country)
         enriched_prompt = f"{summary}\n\n[Context: {civic_context}]"
 
         localized = mock_localize_with_gpt(
             enriched_prompt,
-            region.get("country", "Unknown"),
+            country,
             language,
             education
         )
@@ -84,7 +76,7 @@ if submitted:
         st.code(localized, language="text")
 
         with st.expander("See Context Details"):
-            st.markdown(f"**Region:** {region.get('country', 'Unknown')}")
+            st.markdown(f"**Region:** {country}")
             st.markdown(f"**Civic Context:** {civic_context}")
 
         st.download_button(
@@ -94,4 +86,4 @@ if submitted:
         )
 
     except Exception as e:
-        st.error(f"Error fetching location: {e}")
+        st.error(f"Error generating localized summary: {e}")
