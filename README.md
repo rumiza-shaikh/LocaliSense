@@ -1,70 +1,88 @@
-# 🌍 LocaliSense — Context-Aware AI Localization Layer
+# LocaliSense
 
-**Your words. Your world. Your context.**
+**LocaliSense** is an AI-powered localization layer that transforms generic AI summaries into culturally relevant, civically informed, and contextually appropriate outputs.
 
-LocaliSense is an AI-powered web app that transforms generic AI-generated summaries into culturally relevant, civically informed, and region-specific outputs. Instead of simple translation, LocaliSense localizes tone, examples, and semantics based on user location, education level, and language preferences.
-
----
-
-## 🚀 Live Demo
-
-👉 [Launch the App](https://localisense.streamlit.app) *(hosted on Streamlit Cloud)*
+Built as a multi-page Streamlit web app, it showcases how cognitive localization can enhance the accessibility, clarity, and trustworthiness of generative AI for global users.
 
 ---
 
-## ✨ Features
+## 🌐 Live Demo
 
-- 🧭 **Geographic Localization:** Detects region from latitude/longitude
-- 🗣️ **Multilingual Output:** Supports English, Spanish, and Hindi (mock-based)
-- 🧠 **Civic Context Enrichment:** Adds region-specific civic data to summaries
-- 🧑‍🏫 **Tone Adaptation:** Adjusts content based on education level
-- 💬 **Mock LLM Output:** Simulates GPT-based localization for demonstration
-- 📥 **Export to Text:** Download customized summaries as `.txt` files
+Access the deployed app here:  
+**[https://localisense.streamlit.app](https://localisense.streamlit.app)**
 
 ---
 
-## 🛠️ Built With
+## 🧭 What LocaliSense Does
 
-- [Streamlit](https://streamlit.io/) — Python web app framework
-- [Geopy](https://geopy.readthedocs.io/) — Reverse geocoding for location metadata
-- `mock_localize_with_gpt()` — Simulated LLM behavior (API-free fallback)
-
-> Note: You can replace the mock localizer with OpenAI's GPT-4 or other LLMs once you have API access.
-
----
-
-## 📷 Screenshots
-
-| Input Summary | Localized Output |
-|---------------|------------------|
-| “Climate change reduces crop yields.” | “El cambio climático reduce las cosechas. 📌 Ejemplo: como cuando la sequía afecta a agricultores en Oaxaca.” |
+- Localizes AI-generated summaries based on **country, language, and education level**
+- Enriches content with **regional civic data** (e.g., NEP 2020 for India)
+- Adapts **tone and examples** for local relevance and user clarity
+- Supports multiple languages: **English, Spanish, Hindi, French, Arabic**
+- Accepts user feedback for continuous improvement
 
 ---
 
-## 🧪 Example Use Case
+## 📁 App Structure
 
-A user in New Delhi enters:
-> “How does climate change affect agriculture?”
+This is a multi-page Streamlit app using the `pages/` folder:
 
-**LocaliSense**:
-- Detects their location
-- Adds civic info: *“India’s NEP 2020 emphasizes climate literacy in education”*
-- Translates and adapts tone for Hindi speakers with basic education
-- Returns:
-> “जलवायु परिवर्तन से वर्षा के पैटर्न में बदलाव आता है और फसलों की पैदावार घट जाती है।  
-📌 उदाहरण: यह वैसा ही है जैसे आपके मोहल्ले में मौसम के कारण फसल बर्बाद हो जाए।”
+localisense/
+│
+├── app.py # Homepage
+├── requirements.txt
+├── README.md
+│
+└── pages/
+├── 1_Try_LocaliSense.py # The core tool interface
+├── 2_About_The_Project.py # Concept, architecture, vision
+├── 3_Feedback.py # Anonymous user feedback form
+└── 4_Contact.py # Contact info and external links
+
 
 ---
 
-## 🧑‍💻 How to Run Locally
+## 🚀 How to Run Locally
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/your-username/localisense.git
-cd localisense
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/localisense.git
+   cd localisense
+Install dependencies:
 
-# 2. Install dependencies
+bash
+Copy
+Edit
 pip install -r requirements.txt
+Run the app:
 
-# 3. Run the app
+bash
+Copy
+Edit
 streamlit run app.py
+📦 Requirements
+txt
+Copy
+Edit
+streamlit>=1.32.0
+geopy>=2.3.0
+✍️ About the Creator
+Rumiza Shaikh
+Cornell Tech MBA 2025
+Product Strategy | Applied AI | Global Information Equity
+
+Email: rumiza.shaikh@gmail.com
+
+LinkedIn: linkedin.com/in/rumizashaikh
+
+Portfolio: rumizashaikh.github.io
+
+💡 Future Plans
+Integrate real OpenAI / Gemini LLMs
+
+Connect civic data APIs across more regions
+
+Add user re-ranking loop for feedback-based improvement
+
+Package as an API layer for third-party AI platforms
+
