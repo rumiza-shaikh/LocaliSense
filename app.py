@@ -44,25 +44,27 @@ st.markdown("""
 LocaliSense is an AI-powered localization layer that adapts generic AI summaries into **culturally relevant, civically aware, and contextually appropriate** outputs.  
 Unlike basic translation, it reshapes tone, examples, and semantics to fit real-world users across geographies and languages.
 
-If generative AI is the future of information access, LocaliSense is how we ensure it works for *everyone*, not just the English-speaking world.
+If generative AI is the future of information access, LocaliSense is how we ensure it works for everyone, not just the English-speaking world.
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class='block'>
 <b>What You Can Do With LocaliSense:</b>
-- Convert AI summaries into local language + context
-- Add regional civic data (education, policy, etc.)
-- Adjust tone based on user background
-- Improve clarity and trust for diverse audiences
+- Convert AI summaries into local language + context  
+- Add regional civic data (education, policy, etc.)  
+- Adjust tone based on user background  
+- Improve clarity and trust for diverse audiences  
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class='block'>
 <h4>Try the App</h4>
-Click below to start transforming AI content into something that resonates:
+Click the button below to start transforming AI content into something that resonates:
 </div>
 """, unsafe_allow_html=True)
 
-st.page_link("pages/1_Try_LocaliSense.py", label="Go to Localizer Tool", icon=None)
+# --- Navigation Button (replaces page_link)
+if st.button("Go to Localizer Tool"):
+    st.switch_page("pages/1_Try_LocaliSense.py")
