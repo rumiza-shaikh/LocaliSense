@@ -32,14 +32,27 @@ def civic_data_lookup(topic, region):
 st.set_page_config(page_title="LocaliSense", layout="centered")
 st.title("LocaliSense: Context-Aware AI Summaries")
 
-summary = st.text_area("Enter a generic AI summary:")
-language = st.selectbox("Target Language", ["en", "es", "hi"])
-education = st.selectbox("Education Level", ["basic", "intermediate", "advanced"])
+with st.form("localization_form"):
+    st.subheader("1. Input your AI Summary")
+    summary = st.text_area("Enter the AI-generated summary you'd like to localize:")
 
-lat = st.number_input("Latitude", value=28.6139)
-lon = st.number_input("Longitude", value=77.2090)
+    st.subheader("2. Choose Localization Preferences")
+    cols = st.columns(2)
+    with cols[0]:
+        language = st.selectbox("Target Language", ["en", "es", "hi"])
+    with cols[1]:
+        education = st.selectbox("Education Level", ["basic", "intermediate", "advanced"])
 
-if st.button("Localize Summary"):
+    st.subheader("3. Set Your Location (or leave default)")
+    coords = st.columns(2)
+    with coords[0]:
+        lat = st.number_input("Latitude", value=28.6139)
+    with coords[1]:
+        lon = st.number_input("Longitude", value=77.2090)
+
+    submitted = st.form_submit_button("Localize Summary")
+
+if submitted:
     try:
         geolocator = Nominatim(user_agent="localisense-streamlit")
         location = geolocator.reverse((lat, lon), language='en', timeout=10)
@@ -55,13 +68,19 @@ if st.button("Localize Summary"):
             education
         )
 
-        st.markdown("### Localized Output")
-        st.text(localized)
+        st.markdown("---")
+        st.subheader("Localized Summary")
+        st.code(localized, language="text")
+
+        with st.expander("See Context Details"):
+            st.markdown(f"**Region:** {region.get('country', 'Unknown')}")
+            st.markdown(f"**Civic Context:** {civic_context}")
 
         st.download_button(
-            label="Download Output",
+            label="Download Localized Summary",
             data=localized,
             file_name="localisense_localized_summary.txt"
         )
+
     except Exception as e:
         st.error(f"Error fetching location: {e}")
