@@ -6,7 +6,9 @@ def mock_localize_with_gpt(prompt, region, language, education_level):
     localized_examples = {
         "hi": "उदाहरण: यह वैसा ही है जैसे आपके मोहल्ले में मौसम के कारण फसल बर्बाद हो जाए।",
         "es": "Ejemplo: como cuando la sequía afecta las cosechas en tu región.",
-        "en": "Example: like how farmers in your area face unpredictable rainfall."
+        "en": "Example: like how farmers in your area face unpredictable rainfall.",
+        "fr": "Exemple : comme lorsque la sécheresse détruit les récoltes dans votre région.",
+        "ar": "مثال: مثل عندما تؤثر موجات الجفاف على المحاصيل في منطقتك."
     }
     fallback = localized_examples.get(language, "Example not available for this language")
     return f"""[MOCK LOCALIZATION]\nTarget Language: {language}\nRegion: {region}\nEducation Level: {education_level}\n\nLocalized Summary:\n{prompt}\n\n{fallback}"""
@@ -32,6 +34,14 @@ def civic_data_lookup(topic, region):
 st.set_page_config(page_title="LocaliSense", layout="centered")
 st.title("LocaliSense: Context-Aware AI Summaries")
 
+LANGUAGE_OPTIONS = {
+    "English": "en",
+    "Spanish": "es",
+    "Hindi": "hi",
+    "French": "fr",
+    "Arabic": "ar"
+}
+
 with st.form("localization_form"):
     st.subheader("1. Input your AI Summary")
     summary = st.text_area("Enter the AI-generated summary you'd like to localize:")
@@ -39,7 +49,8 @@ with st.form("localization_form"):
     st.subheader("2. Choose Localization Preferences")
     cols = st.columns(2)
     with cols[0]:
-        language = st.selectbox("Target Language", ["en", "es", "hi"])
+        display_lang = st.selectbox("Target Language", list(LANGUAGE_OPTIONS.keys()))
+        language = LANGUAGE_OPTIONS[display_lang]
     with cols[1]:
         education = st.selectbox("Education Level", ["basic", "intermediate", "advanced"])
 
