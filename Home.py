@@ -9,51 +9,51 @@ st.set_page_config(
 # --- Sidebar label override ---
 st.sidebar.markdown("### Home")
 
-# --- Custom Styling: Georgia Font + Terracotta-Cream Theme ---
+# --- Global Indigo + Georgia Styling ---
 st.markdown("""
     <style>
-        html, body, [class*="css"]  {
+        html, body, [class*="css"] {
             font-family: 'Georgia', serif !important;
-        }
-        .main h1, .main h2, .main h3, .main h4 {
-            font-family: 'Georgia', serif !important;
+            background-color: #F6F1EB !important;
         }
 
-        body {
-            background-color: #FDFBF8;
+        .main h1, .main h2, .main h3, .main h4, .main p {
+            font-family: 'Georgia', serif !important;
         }
 
         .main h1 {
-            color: #2D1B0E;
+            color: #2B2C3F;
             font-weight: 700;
         }
+
         .main h2 {
             font-size: 1.6rem;
             font-weight: 600;
-            color: #2D1B0E;
+            color: #2B2C3F;
         }
+
         .main h4 {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #2D1B0E;
+            color: #2B2C3F;
         }
 
         .tagline {
             font-size: 1.4rem;
             margin-top: 1.5rem;
-            color: #2D1B0E;
+            color: #2B2C3F;
         }
 
         .highlight-box {
-            background-color: #F8F3ED;
-            border-left: 6px solid #C2996B;
+            background-color: #FFFFFF;
+            border-left: 6px solid #3E3D77;
             border-radius: 6px;
             padding: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .stButton>button {
-            background-color: #5B3A24;
+            background-color: #3E3D77;
             color: white;
             font-weight: bold;
             padding: 0.6rem 1.2rem;
@@ -77,7 +77,7 @@ Unlike basic translation, it reshapes tone, examples, and semantics to fit real-
 </div>
 """, unsafe_allow_html=True)
 
-# --- Feature Sections ---
+# --- Feature Cards ---
 st.markdown("### What You Can Do With LocaliSense")
 
 col1, col2 = st.columns(2)
@@ -112,10 +112,10 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-# --- CTA Section ---
+# --- CTA ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### Ready to Explore?")
 st.markdown("Start transforming AI content into something that truly resonates.")
 
 if st.button("Try LocaliSense Now"):
-    st.switch_page("Try LocaliSense")  # Or use a static link if needed: st.markdown("[Try LocaliSense](/Try-LocaliSense)")
+    st.switch_page("Try LocaliSense")
