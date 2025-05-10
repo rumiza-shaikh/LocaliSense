@@ -1,6 +1,10 @@
 import streamlit as st
 
-st.set_page_config(page_title="About LocaliSense", layout="centered")
+st.set_page_config(
+    page_title="About the Project",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 st.title("About the Project")
 st.markdown("---")
@@ -11,37 +15,32 @@ Generative AI tools like ChatGPT, Bard, and Google's SGE often produce summaries
 - Linguistically accurate, but **culturally tone-deaf**
 - Biased toward **Western contexts**
 - Lacking **civic or regional relevance** for users in non-English or emerging markets
-
-This limits trust, clarity, and ultimately user retention — especially for global-scale platforms.
 """)
 
 st.subheader("The LocaliSense Solution")
 st.markdown("""
-LocaliSense is an **AI-powered localization layer** designed to sit on top of any generative summary engine and transform the output into:
+LocaliSense is an AI-powered localization layer that transforms generic summaries into:
 - Regionally grounded content
-- Tone adapted to the user's education level
-- Enhanced with real-world civic examples
-
-This helps users **understand better, relate faster**, and trust AI results — especially in multilingual or underserved markets.
+- Tone adapted to user context
+- Civic-aware, example-rich output
 """)
 
 st.subheader("How It Works (Prototype)")
 st.markdown("""
-1. **Input:** A generic AI summary (e.g., from an LLM)
-2. **User Context:** Country, preferred language, education level
-3. **Civic Injection:** Pull civic data or region-specific reforms (e.g., NEP 2020 in India)
-4. **Localization Engine:** Adjust tone, translate meaningfully, and add culturally aligned examples
-5. **Output:** A localized summary that resonates
+1. Input: AI summary  
+2. User inputs: Country, language, education level  
+3. Adds civic context from a regional knowledge base  
+4. Adjusts language, tone, and examples  
+5. Outputs a localized result  
 
-> Currently, the prototype uses mock civic data and a simulated LLM. Real-time integration with OpenAI or Gemini APIs is a planned upgrade.
+Currently, this is done with mock data — integration with live APIs is on the roadmap.
 """)
 
 st.subheader("Why It Matters")
 st.markdown("""
-- **Knowledge equity**: Not all users process AI summaries the same way
-- **Trust & retention**: Localized output reduces bounce rates and improves comprehension
-- **Scalable impact**: Plug-and-play for Search, Translate, Lens, civic tech, and more
+- **Trust**: Users relate better to content grounded in their region  
+- **Clarity**: Tone and examples adapted to educational background  
+- **Equity**: A step toward fairer access to information across borders  
 """)
 
-st.info("This project was built by Rumiza Shaikh as part of her Cornell Tech MBA, with the vision of making AI-generated information truly inclusive and universally useful.")
-
+st.caption("Built by Rumiza Shaikh, Cornell Tech MBA 2025.")
