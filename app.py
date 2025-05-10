@@ -2,9 +2,11 @@ import streamlit as st
 
 st.set_page_config(
     page_title="LocaliSense",
-    layout="centered"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# --- Custom Styling ---
 st.markdown("""
     <style>
         .main h1 {
@@ -23,7 +25,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Simulated Menu Bar (informational only) ---
+# --- Informational Menu Bar (non-clickable) ---
 st.markdown("#### Menu: Home | Try LocaliSense | About | Feedback | Contact")
 st.caption("Use the sidebar on the left to access each section.")
 
@@ -55,6 +57,6 @@ st.markdown("""
 st.markdown("""
 <div class='block'>
 <h4>Try the App</h4>
-Click "Try LocaliSense" in the **sidebar** to get started.
+Use the **sidebar on the left** to navigate to the Localizer Tool and start testing.
 </div>
 """, unsafe_allow_html=True)
