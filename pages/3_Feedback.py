@@ -1,25 +1,28 @@
 import streamlit as st
 
-st.set_page_config(page_title="Feedback", layout="centered")
+st.set_page_config(
+    page_title="Feedback",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 st.title("Feedback")
 st.markdown("---")
 
 st.markdown("""
-We'd love to hear from you.
+We welcome your input to make LocaliSense better.
 
-Whether you're a user, researcher, or product leader, your feedback helps us improve LocaliSense and make it more useful across geographies and use cases.
+Let us know what worked, what didn’t, or what you'd like to see next.
 """)
 
 with st.form("feedback_form"):
-    st.subheader("Tell us what you think")
+    st.subheader("Share Your Thoughts")
     name = st.text_input("Your Name (optional)")
-    role = st.selectbox("Are you a:", ["General User", "Product Manager", "Engineer", "Designer", "Researcher", "Other"])
-    comments = st.text_area("What's working well? What could be improved?")
+    role = st.selectbox("You are a:", ["General User", "Product Manager", "Engineer", "Designer", "Researcher", "Other"])
+    comments = st.text_area("Your feedback:")
     submitted = st.form_submit_button("Submit")
 
     if submitted:
         st.success("Thank you! Your feedback has been recorded.")
 
-st.markdown("---")
-st.caption("Note: This is a prototype. Feedback is stored anonymously and not linked to any user identity.")
+st.caption("This prototype stores feedback anonymously.")
