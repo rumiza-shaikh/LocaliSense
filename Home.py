@@ -36,27 +36,23 @@ st.markdown("""
             padding: 1rem;
             margin-bottom: 1.5rem;
         }
-        .cta-button {
-            background-color: #003262;
-            color: white;
+        .button-container button {
+            background-color: #003262 !important;
+            color: white !important;
             font-weight: 600;
-            padding: 0.5rem 1.2rem;
             border-radius: 6px;
-            margin-top: 1rem;
-            text-align: center;
+            padding: 0.6rem 1.2rem;
+            border: none;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# --- Hero Section ---
+# --- Header and Tagline ---
 st.markdown("<h2 class='tagline'>AI is Global. So Should Its Voice Be.</h2>", unsafe_allow_html=True)
 st.title("LocaliSense")
 st.markdown("Making Generative AI Truly Local and Useful")
 
-# --- Tool Preview Image (optional demo image) ---
-st.image("images/localisense-preview.png", caption="LocaliSense adapts summaries by region, language, and tone.", use_column_width=True)
-
-# --- What Is LocaliSense ---
+# --- Overview Box ---
 st.markdown("""
 <div class='highlight-box'>
 LocaliSense is an AI-powered localization layer that adapts generic AI summaries into <strong>culturally relevant, civically aware, and contextually appropriate</strong> outputs.
@@ -64,15 +60,16 @@ Unlike basic translation, it reshapes tone, examples, and semantics to fit real-
 </div>
 """, unsafe_allow_html=True)
 
-# --- Key Features Section ---
+# --- Feature Cards ---
 st.markdown("### What You Can Do With LocaliSense")
+
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("""
     <div class='highlight-box'>
     <h4>Contextual Localization</h4>
-    Converts AI summaries into regionally grounded language with local analogies and examples.
+    Converts AI summaries into regionally grounded language with local analogies and tone adjustments.
     </div>
     """, unsafe_allow_html=True)
 
@@ -80,7 +77,7 @@ with col2:
     st.markdown("""
     <div class='highlight-box'>
     <h4>Civic-Aware Output</h4>
-    Automatically injects public policy and education context based on the user's region.
+    Automatically injects public policy and education context based on the user's location.
     </div>
     """, unsafe_allow_html=True)
 
@@ -98,17 +95,19 @@ with col4:
     st.markdown("""
     <div class='highlight-box'>
     <h4>Plug-and-Play Architecture</h4>
-    Ready to be integrated with any generative search, translate, or civic tool.
+    Ready to be integrated with any generative search, translate, or civic application.
     </div>
     """, unsafe_allow_html=True)
 
 # --- CTA Section ---
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("### Try the App")
+st.markdown("### Ready to Explore?")
+st.markdown("Start transforming AI content into something that truly resonates.")
 
-st.markdown("""
-Use the <strong>sidebar on the left</strong> to start using the Localizer Tool and see how summaries can be transformed into culturally resonant content.
-""", unsafe_allow_html=True)
-
-if st.button("Go to Localizer Tool"):
-    st.switch_page("Try LocaliSense")  # Make sure this matches your sidebar title exactly
+with st.container():
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        pass
+    with col2:
+        if st.button("Try LocaliSense Now"):
+            st.switch_page("Try LocaliSense")  # Replace with static link if needed
