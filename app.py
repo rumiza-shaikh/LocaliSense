@@ -6,7 +6,10 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Custom Styling ---
+# --- Rename 'app' to 'Home' in sidebar ---
+st.sidebar.markdown("### Home")
+
+# --- Optional custom styling ---
 st.markdown("""
     <style>
         .main h1 {
@@ -24,12 +27,6 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
-# --- Informational Menu Bar (non-clickable) ---
-st.markdown("#### Menu: Home | Try LocaliSense | About | Feedback | Contact")
-st.caption("Use the sidebar on the left to access each section.")
-
-st.markdown("---")
 
 # --- Page Content ---
 st.title("LocaliSense")
