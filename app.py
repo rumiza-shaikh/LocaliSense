@@ -3,8 +3,24 @@ import streamlit as st
 st.set_page_config(
     page_title="LocaliSense",
     page_icon=None,
-    layout="centered"
+    layout="wide"
 )
+
+# --- Fake top nav bar using columns ---
+col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 6])
+
+with col1:
+    st.markdown("[Home](/)", unsafe_allow_html=True)
+with col2:
+    st.markdown("[Try LocaliSense](/Try-LocaliSense)", unsafe_allow_html=True)
+with col3:
+    st.markdown("[About](/About-the-Project)", unsafe_allow_html=True)
+with col4:
+    st.markdown("[Feedback](/Feedback)", unsafe_allow_html=True)
+with col5:
+    st.markdown("[Contact](/Contact)", unsafe_allow_html=True)
+
+st.markdown("---")
 
 # --- Custom Styling ---
 st.markdown("""
@@ -21,16 +37,6 @@ st.markdown("""
             padding: 1rem;
             border-radius: 8px;
             margin-top: 1.5rem;
-        }
-        .cta-button {
-            background-color: #0072C6;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            display: inline-block;
-            margin-top: 1rem;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -61,9 +67,6 @@ st.markdown("""
 st.markdown("""
 <div class='block'>
 <h4>Try the App</h4>
-Click the link below to start transforming AI content into something that resonates:
+Click "Try LocaliSense" in the top menu to get started.
 </div>
 """, unsafe_allow_html=True)
-
-# --- Correct static link to the page title
-st.markdown("[Go to Localizer Tool](/Try-LocaliSense)")
