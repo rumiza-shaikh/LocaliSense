@@ -1,6 +1,12 @@
 import streamlit as st
 from geopy.geocoders import Nominatim
 
+st.set_page_config(
+    page_title="Try LocaliSense",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # --- Mock Localizer ---
 def mock_localize_with_gpt(prompt, region, language, education_level):
     localized_examples = {
@@ -63,9 +69,7 @@ with st.form("localization_form"):
 
 if submitted:
     try:
-        # Simulate a region object for mock data
         region_meta = {"country": country}
-
         civic_context = civic_data_lookup("education", region_meta)
         enriched_prompt = f"{summary}\n\n[Context: {civic_context}]"
 
