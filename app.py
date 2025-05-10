@@ -61,10 +61,9 @@ st.markdown("""
 st.markdown("""
 <div class='block'>
 <h4>Try the App</h4>
-Click the button below to start transforming AI content into something that resonates:
+Click the link below to start transforming AI content into something that resonates:
 </div>
 """, unsafe_allow_html=True)
 
-# --- Navigation Button (correct page name)
-if st.button("Go to Localizer Tool"):
-    st.switch_page("Try LocaliSense")
+# --- Static link to the first page (reliable fix)
+st.markdown("[Go to Localizer Tool](./1_Try_LocaliSense)")
