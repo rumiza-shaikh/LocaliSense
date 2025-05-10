@@ -19,9 +19,9 @@ st.markdown("""
 Cornell Tech MBA 2025  
 Product Strategy | Applied AI | Global Localization
 
-Email: [rumiza.shaikh@gmail.com](mailto:rumiza.shaikh@gmail.com)  
-LinkedIn: [linkedin.com/in/rumizashaikh](https://linkedin.com/in/rumizashaikh)  
-Portfolio: [rumizashaikh.github.io](https://rumizashaikh.github.io)
+Email: [ss4287@cornell.edu](mailto:ss4287@cornell.edu)  
+LinkedIn: [linkedin.com/in/rumiza-shaikh](https://www.linkedin.com/in/rumiza-shaikh/)  
+Portfolio: [github.com/rumiza-shaikh](https://github.com/rumiza-shaikh)
 """)
 
 st.caption("You may also leave comments in the Feedback section.")
