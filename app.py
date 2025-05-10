@@ -65,5 +65,5 @@ Click the link below to start transforming AI content into something that resona
 </div>
 """, unsafe_allow_html=True)
 
-# --- Static link to the first page (reliable fix)
-st.markdown("[Go to Localizer Tool](./1_Try_LocaliSense)")
+# --- Correct static link to the page title
+st.markdown("[Go to Localizer Tool](/Try-LocaliSense)")
