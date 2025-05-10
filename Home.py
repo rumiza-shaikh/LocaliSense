@@ -6,19 +6,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Sidebar label override ---
+# --- Sidebar label ---
 st.sidebar.markdown("### Home")
 
-# --- Global Indigo + Georgia Styling ---
+# --- Full Georgia Font + Global Indigo Theme ---
 st.markdown("""
     <style>
-        html, body, [class*="css"] {
+        html, body, textarea, input, [class^="st-"], [class*="stMarkdown"], .main {
             font-family: 'Georgia', serif !important;
-            background-color: #F6F1EB !important;
         }
 
-        .main h1, .main h2, .main h3, .main h4, .main p {
+        .main h1, .main h2, .main h3, .main h4, .main p, .main span {
             font-family: 'Georgia', serif !important;
+        }
+
+        .markdown-text-container {
+            font-family: 'Georgia', serif !important;
+        }
+
+        section[data-testid="stSidebar"] {
+            font-family: 'Georgia', serif !important;
+        }
+
+        body {
+            background-color: #F6F1EB;
         }
 
         .main h1 {
@@ -77,7 +88,7 @@ Unlike basic translation, it reshapes tone, examples, and semantics to fit real-
 </div>
 """, unsafe_allow_html=True)
 
-# --- Feature Cards ---
+# --- Feature Section ---
 st.markdown("### What You Can Do With LocaliSense")
 
 col1, col2 = st.columns(2)
@@ -88,6 +99,7 @@ with col1:
     Converts summaries into regionally grounded, culturally appropriate content.
     </div>
     """, unsafe_allow_html=True)
+
 with col2:
     st.markdown("""
     <div class='highlight-box'>
@@ -104,6 +116,7 @@ with col3:
     Matches tone and complexity to user education level.
     </div>
     """, unsafe_allow_html=True)
+
 with col4:
     st.markdown("""
     <div class='highlight-box'>
@@ -112,7 +125,7 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-# --- CTA ---
+# --- CTA Section ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("### Ready to Explore?")
 st.markdown("Start transforming AI content into something that truly resonates.")
