@@ -2,27 +2,9 @@ import streamlit as st
 
 st.set_page_config(
     page_title="LocaliSense",
-    page_icon=None,
-    layout="wide"
+    layout="centered"
 )
 
-# --- Fake top nav bar using columns ---
-col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 6])
-
-with col1:
-    st.markdown("[Home](/)", unsafe_allow_html=True)
-with col2:
-    st.markdown("[Try LocaliSense](/Try-LocaliSense)", unsafe_allow_html=True)
-with col3:
-    st.markdown("[About](/About-the-Project)", unsafe_allow_html=True)
-with col4:
-    st.markdown("[Feedback](/Feedback)", unsafe_allow_html=True)
-with col5:
-    st.markdown("[Contact](/Contact)", unsafe_allow_html=True)
-
-st.markdown("---")
-
-# --- Custom Styling ---
 st.markdown("""
     <style>
         .main h1 {
@@ -40,6 +22,12 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
+# --- Simulated Menu Bar (informational only) ---
+st.markdown("#### Menu: Home | Try LocaliSense | About | Feedback | Contact")
+st.caption("Use the sidebar on the left to access each section.")
+
+st.markdown("---")
 
 # --- Page Content ---
 st.title("LocaliSense")
@@ -67,6 +55,6 @@ st.markdown("""
 st.markdown("""
 <div class='block'>
 <h4>Try the App</h4>
-Click "Try LocaliSense" in the top menu to get started.
+Click "Try LocaliSense" in the **sidebar** to get started.
 </div>
 """, unsafe_allow_html=True)
