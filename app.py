@@ -65,6 +65,6 @@ Click the button below to start transforming AI content into something that reso
 </div>
 """, unsafe_allow_html=True)
 
-# --- Navigation Button (replaces page_link)
+# --- Navigation Button (correct page name)
 if st.button("Go to Localizer Tool"):
-    st.switch_page("pages/1_Try_LocaliSense.py")
+    st.switch_page("Try LocaliSense")
