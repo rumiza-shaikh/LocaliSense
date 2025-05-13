@@ -47,7 +47,7 @@ with st.form("feedback_form"):
         submitted = st.form_submit_button("Submit")
         st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Save feedback if submitted ---
+# --- Save Feedback ---
 if submitted:
     new_entry = pd.DataFrame({
         "timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
@@ -64,14 +64,14 @@ if submitted:
     all_feedback.to_csv(feedback_file, index=False)
     st.success("Thank you for your feedback!")
 
-# --- Display Feedback as Testimonials ---
+# --- Display Testimonials ---
 try:
     feedback_df = pd.read_csv(feedback_file)
     if not feedback_df.empty:
         st.markdown("### What People Are Saying")
 
         for _, row in feedback_df.tail(5).iterrows():
-            st.markdown(f"""
+            testimonial_html = f"""
                 <div style='
                     background-color: #ffffff;
                     border: 1px solid #eee;
@@ -83,10 +83,11 @@ try:
                     <div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
                     <div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
                     <div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>
-                        “{row['feedback']}”
+                        “{row['feedback'].strip()}”
                     </div>
                 </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(testimonial_html, unsafe_allow_html=True)
 
 except FileNotFoundError:
     st.info("No feedback has been submitted yet.")
