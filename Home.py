@@ -6,17 +6,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Sidebar label ---
+# --- Sidebar label override ---
 st.sidebar.markdown("### Home")
 
-# --- Full Georgia Font + Global Indigo Theme ---
+# --- Threads-style UI + Georgia Font ---
 st.markdown("""
     <style>
         html, body, textarea, input, [class^="st-"], [class*="stMarkdown"], .main {
             font-family: 'Georgia', serif !important;
+            background-color: #ffffff;
+            color: #111111;
         }
 
-        .main h1, .main h2, .main h3, .main h4, .main p, .main span {
+        .main h1, .main h2, .main h3, .main h4 {
             font-family: 'Georgia', serif !important;
         }
 
@@ -28,107 +30,67 @@ st.markdown("""
             font-family: 'Georgia', serif !important;
         }
 
-        body {
-            background-color: #F6F1EB;
-        }
-
-        .main h1 {
-            color: #2B2C3F;
-            font-weight: 700;
-        }
-
-        .main h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #2B2C3F;
-        }
-
-        .main h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #2B2C3F;
-        }
-
-        .tagline {
-            font-size: 1.4rem;
-            margin-top: 1.5rem;
-            color: #2B2C3F;
-        }
-
-        .highlight-box {
-            background-color: #FFFFFF;
-            border-left: 6px solid #3E3D77;
-            border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
         .stButton>button {
-            background-color: #3E3D77;
+            background-color: black;
             color: white;
-            font-weight: bold;
-            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 6px;
-            margin-top: 1rem;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+        }
+
+        .post-box {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 1.5rem 0;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# --- Hero Section ---
-st.markdown("<h2 class='tagline'>AI is Global. So Should Its Voice Be.</h2>", unsafe_allow_html=True)
+# --- Page Heading ---
 st.title("LocaliSense")
-st.markdown("Making Generative AI Truly Local and Useful")
+st.markdown("### Where AI Meets Cultural Relevance")
 
-# --- Overview Box ---
-st.markdown("""
-<div class='highlight-box'>
-LocaliSense is an AI-powered localization layer that adapts generic AI summaries into <strong>culturally relevant, civically aware, and contextually appropriate</strong> outputs.
-Unlike basic translation, it reshapes tone, examples, and semantics to fit real-world users across geographies and educational backgrounds.
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<hr class='divider'>", unsafe_allow_html=True)
 
-# --- Feature Section ---
-st.markdown("### What You Can Do With LocaliSense")
+# --- Simulated Threads-style feed ---
+sample_posts = [
+    {
+        "author": "India – Basic Education",
+        "time": "10 mins ago",
+        "content": "Climate change is reducing rainfall. It's like when farmers in my village lose crops due to late monsoons. NEP 2020 helps us localize education around this."
+    },
+    {
+        "author": "Mexico – Intermediate",
+        "time": "25 mins ago",
+        "content": "SEP Reforma includes bilingualism to support learning that reflects both local culture and national goals. AI summaries should do the same."
+    },
+    {
+        "author": "USA – Advanced",
+        "time": "1 hr ago",
+        "content": "The Every Student Succeeds Act promotes local decision-making in schools. LocaliSense adapts AI content with the same spirit."
+    },
+]
 
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("""
-    <div class='highlight-box'>
-    <h4>Contextual Localization</h4>
-    Converts summaries into regionally grounded, culturally appropriate content.
-    </div>
-    """, unsafe_allow_html=True)
+# --- Feed Loop ---
+for post in sample_posts:
+    with st.container():
+        st.markdown(f"<div class='post-box'>", unsafe_allow_html=True)
+        st.markdown(f"**{post['author']}**  •  {post['time']}")
+        st.markdown(post["content"])
+        st.markdown("</div>", unsafe_allow_html=True)
 
-with col2:
-    st.markdown("""
-    <div class='highlight-box'>
-    <h4>Civic-Aware Output</h4>
-    Embeds region-specific education and policy context automatically.
-    </div>
-    """, unsafe_allow_html=True)
+# --- CTA Button ---
+st.markdown("<hr class='divider'>", unsafe_allow_html=True)
+st.markdown("Want to test your own AI summary?")
 
-col3, col4 = st.columns(2)
-with col3:
-    st.markdown("""
-    <div class='highlight-box'>
-    <h4>Education-Based Tone</h4>
-    Matches tone and complexity to user education level.
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown("""
-    <div class='highlight-box'>
-    <h4>Plug-and-Play Architecture</h4>
-    Designed to enhance any AI-based tool or product interface.
-    </div>
-    """, unsafe_allow_html=True)
-
-# --- CTA Section ---
-st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("### Ready to Explore?")
-st.markdown("Start transforming AI content into something that truly resonates.")
-
-if st.button("Try LocaliSense Now"):
-    st.switch_page("Try LocaliSense")
+if st.button("Try LocaliSense Tool"):
+    st.switch_page("Try LocaliSense")  # Make sure this matches the page title
