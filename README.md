@@ -1,88 +1,100 @@
 # LocaliSense
 
-**LocaliSense** is an AI-powered localization layer that transforms generic AI summaries into culturally relevant, civically informed, and contextually appropriate outputs.
+**Making Generative AI Truly Local and Useful**
 
-Built as a multi-page Streamlit web app, it showcases how cognitive localization can enhance the accessibility, clarity, and trustworthiness of generative AI for global users.
-
----
-
-## 🌐 Live Demo
-
-Access the deployed app here:  
-**[https://localisense.streamlit.app](https://localisense.streamlit.app)**
+LocaliSense is an AI-powered localization layer that transforms generic AI summaries into culturally relevant, linguistically accurate, and civically grounded content. It adapts tone, analogies, and semantics based on a user’s **region**, **language**, and **education level** — going far beyond simple translation.
 
 ---
 
-## 🧭 What LocaliSense Does
+## 🧠 Why LocaliSense?
 
-- Localizes AI-generated summaries based on **country, language, and education level**
-- Enriches content with **regional civic data** (e.g., NEP 2020 for India)
-- Adapts **tone and examples** for local relevance and user clarity
-- Supports multiple languages: **English, Spanish, Hindi, French, Arabic**
-- Accepts user feedback for continuous improvement
+Generative AI often produces summaries that are:
 
----
+- Too Western or urban-centric
+- Unintelligible for users in developing or multilingual regions
+- Lacking civic, educational, or cultural relevance
 
-## 📁 App Structure
-
-This is a multi-page Streamlit app using the `pages/` folder:
-
-localisense/
-│
-├── app.py # Homepage
-├── requirements.txt
-├── README.md
-│
-└── pages/
-├── 1_Try_LocaliSense.py # The core tool interface
-├── 2_About_The_Project.py # Concept, architecture, vision
-├── 3_Feedback.py # Anonymous user feedback form
-└── 4_Contact.py # Contact info and external links
-
+**LocaliSense bridges this gap** by using cognitive localization techniques, civic data injection, and regional analogies to help AI output actually *land* with the audience it’s meant to serve.
 
 ---
 
-## 🚀 How to Run Locally
+## 💡 Key Features
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/localisense.git
-   cd localisense
-Install dependencies:
+- ✅ **Context-Aware Localization**  
+  Adapts summaries based on location and learning level
 
+- ✅ **Civic Policy Integration**  
+  Adds country-specific educational or policy context
+
+- ✅ **Tone-Scaled Analogies**  
+  Automatically shifts examples for basic, intermediate, or advanced learners
+
+- ✅ **Language-Aware Output**  
+  Supports English, Hindi, and Spanish, with more coming
+
+- ✅ **Threads-Style Minimal UI**  
+  Clean, feed-inspired UX with Georgia font and zero clutter
+
+- ✅ **User Feedback Loop**  
+  Users rate localization quality to continuously improve the experience
+
+---
+
+## 📸 UI Preview
+
+🚀 Getting Started
+1. Clone the repository
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/localisense.git
+cd localisense
+
+2. Install requirements
 bash
 Copy
 Edit
 pip install -r requirements.txt
-Run the app:
 
+3. Run the app
 bash
 Copy
 Edit
-streamlit run app.py
-📦 Requirements
-txt
+streamlit run Home.py
+Make sure the pages/ folder contains 1_Try_LocaliSense.py, 2_About_The_Project.py, 3_Feedback.py, and 4_Contact.py.
+
+🌍 Live Demo
+Try the deployed app here:
+https://localisense-mvp.streamlit.app
+
+📁 Folder Structure
 Copy
 Edit
-streamlit>=1.32.0
-geopy>=2.3.0
-✍️ About the Creator
-Rumiza Shaikh
-Cornell Tech MBA 2025
-Product Strategy | Applied AI | Global Information Equity
+localisense/
+├── Home.py
+├── pages/
+│   ├── 1_Try_LocaliSense.py
+│   ├── 2_About_The_Project.py
+│   ├── 3_Feedback.py
+│   └── 4_Contact.py
+├── requirements.txt
+├── README.md
 
-Email: rumiza.shaikh@gmail.com
+🛠 Built With
+Streamlit
+Geopy
+Civic policy templates + cultural analogy mock datasets
 
-LinkedIn: linkedin.com/in/rumizashaikh
+📬 Contact
+Built by: Rumiza Shaikh
+Email: ss4287@cornell.edu
+Affiliation: Cornell Tech
+License: MIT
 
-Portfolio: rumizashaikh.github.io
 
-💡 Future Plans
-Integrate real OpenAI / Gemini LLMs
-
-Connect civic data APIs across more regions
-
-Add user re-ranking loop for feedback-based improvement
-
-Package as an API layer for third-party AI platforms
-
+```text
+🧾 Home Page — Scrollable feed of regionally adapted AI content  
+📝 Try Page  — Submit summaries, receive localized output  
+💬 Feedback  — Share user relevance with thumbs up/down  
+📄 About     — Learn the mission  
+📧 Contact   — Reach the creator
