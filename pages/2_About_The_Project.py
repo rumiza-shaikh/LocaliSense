@@ -1,46 +1,46 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="About the Project",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="About", layout="wide")
+st.sidebar.markdown("### About")
 
-st.title("About the Project")
-st.markdown("---")
-
-st.subheader("The Problem")
+# --- Style ---
 st.markdown("""
-Generative AI tools like ChatGPT, Bard, and Google's SGE often produce summaries that are:
-- Linguistically accurate, but **culturally tone-deaf**
-- Biased toward **Western contexts**
-- Lacking **civic or regional relevance** for users in non-English or emerging markets
-""")
+    <style>
+        html, body, [class*="css"], textarea, input {
+            font-family: 'Georgia', serif !important;
+            background-color: #ffffff;
+            color: #111111;
+        }
 
-st.subheader("The LocaliSense Solution")
-st.markdown("""
-LocaliSense is an AI-powered localization layer that transforms generic summaries into:
-- Regionally grounded content
-- Tone adapted to user context
-- Civic-aware, example-rich output
-""")
+        .content-box {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
 
-st.subheader("How It Works (Prototype)")
-st.markdown("""
-1. Input: AI summary  
-2. User inputs: Country, language, education level  
-3. Adds civic context from a regional knowledge base  
-4. Adjusts language, tone, and examples  
-5. Outputs a localized result  
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 1.5rem 0;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-Currently, this is done with mock data — integration with live APIs is on the roadmap.
-""")
+st.title("About LocaliSense")
+st.markdown("<hr class='divider'>", unsafe_allow_html=True)
 
-st.subheader("Why It Matters")
-st.markdown("""
-- **Trust**: Users relate better to content grounded in their region  
-- **Clarity**: Tone and examples adapted to educational background  
-- **Equity**: A step toward fairer access to information across borders  
-""")
-
-st.caption("Built by Rumiza Shaikh, Cornell Tech MBA 2025.")
+with st.container():
+    st.markdown("""
+    <div class='content-box'>
+    <p>
+    LocaliSense is a localization intelligence layer built on top of generative AI outputs. Its mission is to transform generic summaries into versions that are linguistically accurate, culturally aware, and civically grounded.
+    </p>
+    <p>
+    Unlike basic translation tools, LocaliSense adapts tone, semantic context, and real-world examples based on the user’s country, education level, and language.
+    </p>
+    <p>
+    Ideal for global deployments of AI in education, civic tech, and search — LocaliSense helps close the gap between technological fluency and cultural relevance.
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
