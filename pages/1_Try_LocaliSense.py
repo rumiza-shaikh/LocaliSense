@@ -7,92 +7,115 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Mock Localizer ---
-def mock_localize_with_gpt(prompt, region, language, education_level):
-    localized_examples = {
-        "hi": "उदाहरण: यह वैसा ही है जैसे आपके मोहल्ले में मौसम के कारण फसल बर्बाद हो जाए।",
-        "es": "Ejemplo: como cuando la sequía afecta las cosechas en tu región.",
-        "en": "Example: like how farmers in your area face unpredictable rainfall.",
-        "fr": "Exemple : comme lorsque la sécheresse détruit les récoltes dans votre région.",
-        "ar": "مثال: مثل عندما تؤثر موجات الجفاف على المحاصيل في منطقتك."
-    }
-    fallback = localized_examples.get(language, "Example not available for this language")
-    return f"""[MOCK LOCALIZATION]\nTarget Language: {language}\nRegion: {region}\nEducation Level: {education_level}\n\nLocalized Summary:\n{prompt}\n\n{fallback}"""
+st.sidebar.markdown("### Try LocaliSense")
 
-# --- Civic Data ---
-def civic_data_lookup(topic, region):
-    mock_civic_database = {
-        "India": {
-            "education": "India's NEP 2020 aims to make education more localized, flexible, and multidisciplinary."
-        },
-        "Mexico": {
-            "education": "SEP Reforma is designed to modernize education through bilingualism and cultural responsiveness."
-        },
-        "USA": {
-            "education": "The Every Student Succeeds Act emphasizes local control and equity in K–12 education."
+# --- Global Styling for Threads Theme + Georgia Font ---
+st.markdown("""
+    <style>
+        html, body, textarea, input, [class^="st-"], [class*="stMarkdown"], .main {
+            font-family: 'Georgia', serif !important;
+            background-color: #ffffff;
+            color: #111111;
         }
-    }
-    country = region.get("country", "Unknown")
-    topic_data = mock_civic_database.get(country, {}).get(topic.lower())
-    return topic_data or f"No civic data available for {topic} in {country}."
 
-# --- App Page ---
+        .main h1, .main h2, .main h3, .main h4 {
+            font-family: 'Georgia', serif !important;
+        }
+
+        .markdown-text-container {
+            font-family: 'Georgia', serif !important;
+        }
+
+        .stButton>button {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .input-box {
+            background-color: #f9f9f9;
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .post-box {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 1.5rem 0;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# --- Page Header ---
 st.title("Try LocaliSense")
-st.markdown("Convert a generic AI summary into a localized, civic-aware version tailored for real-world users.")
+st.markdown("Input a generic AI summary and see how LocaliSense adapts it for real-world users.")
 
-LANGUAGE_OPTIONS = {
-    "English": "en",
-    "Spanish": "es",
-    "Hindi": "hi",
-    "French": "fr",
-    "Arabic": "ar"
-}
+st.markdown("<hr class='divider'>", unsafe_allow_html=True)
 
-COUNTRY_OPTIONS = ["India", "Mexico", "USA"]
-
+# --- Localization Form ---
 with st.form("localization_form"):
-    st.subheader("1. Input your AI Summary")
-    summary = st.text_area("Enter the AI-generated summary you'd like to localize:")
+    st.markdown("<div class='input-box'>", unsafe_allow_html=True)
 
-    st.subheader("2. Choose Localization Preferences")
-    cols = st.columns(2)
-    with cols[0]:
-        display_lang = st.selectbox("Target Language", list(LANGUAGE_OPTIONS.keys()))
-        language = LANGUAGE_OPTIONS[display_lang]
-    with cols[1]:
+    st.subheader("Enter AI Summary")
+    summary = st.text_area("Paste your AI-generated summary here:")
+
+    st.subheader("Localization Preferences")
+    col1, col2 = st.columns(2)
+    with col1:
+        country = st.selectbox("Country", ["India", "Mexico", "USA"])
+    with col2:
         education = st.selectbox("Education Level", ["basic", "intermediate", "advanced"])
-
-    st.subheader("3. Select Your Country")
-    country = st.selectbox("Select your region/country", COUNTRY_OPTIONS)
+    language = st.selectbox("Language", ["English", "Hindi", "Spanish"])
 
     submitted = st.form_submit_button("Localize Summary")
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# --- Localization Logic ---
+def civic_data_lookup(country):
+    db = {
+        "India": "NEP 2020 aims to make education localized and multidisciplinary.",
+        "Mexico": "SEP Reforma adds bilingualism and cultural responsiveness.",
+        "USA": "The Every Student Succeeds Act supports local control in schools."
+    }
+    return db.get(country, "")
+
+def mock_localize(summary, country, language, education):
+    localized_example = {
+        "English": "Example: Like when drought hits farmers in your region.",
+        "Hindi": "उदाहरण: जैसे सूखा आपके इलाके की फसलें बर्बाद कर देता है।",
+        "Spanish": "Ejemplo: como cuando la sequía afecta los cultivos en tu región."
+    }
+    context = civic_data_lookup(country)
+    return f"{summary}\n\n[Context: {context}]\n\n{localized_example.get(language, '')}"
+
+# --- Output ---
 if submitted:
-    try:
-        region_meta = {"country": country}
-        civic_context = civic_data_lookup("education", region_meta)
-        enriched_prompt = f"{summary}\n\n[Context: {civic_context}]"
+    localized_result = mock_localize(summary, country, language, education)
 
-        localized = mock_localize_with_gpt(
-            enriched_prompt,
-            region_meta['country'],
-            language,
-            education
-        )
+    st.markdown("<h4>Localized Output</h4>", unsafe_allow_html=True)
+    with st.container():
+        st.markdown(f"<div class='post-box'>", unsafe_allow_html=True)
+        st.markdown(f"**{country} – {education.capitalize()}**")
+        st.markdown(localized_result)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-        st.markdown("---")
-        st.subheader("Localized Summary")
-        st.code(localized, language="text")
-
-        with st.expander("See Context Details"):
-            st.markdown(f"**Region:** {region_meta['country']}")
-            st.markdown(f"**Civic Context:** {civic_context}")
-
-        st.download_button(
-            label="Download Localized Summary",
-            data=localized,
-            file_name="localisense_localized_summary.txt"
-        )
-
-    except Exception as e:
-        st.error(f"Error generating localization: {e}")
+    st.download_button(
+        label="Download Localized Summary",
+        data=localized_result,
+        file_name="localized_summary.txt"
+    )
