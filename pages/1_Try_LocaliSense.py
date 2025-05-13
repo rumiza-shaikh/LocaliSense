@@ -132,6 +132,8 @@ if submitted:
     )
 
     # --- Feedback Prompt ---
-    st.markdown("### Did this feel relevant?")
-    relevance = st.radio("Your feedback helps us improve:", ["👍 Yes", "👎 Not really"], horizontal=True)
-    st.success("Thanks for your feedback!") if relevance else None
+st.markdown("### Did this feel relevant?")
+relevance = st.radio("Your feedback helps us improve:", ["👍 Yes", "👎 Not really"])
+
+if relevance:
+    st.success("Thanks for your feedback!")
