@@ -47,7 +47,7 @@ with st.form("feedback_form"):
         submitted = st.form_submit_button("Submit")
         st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Save and Show Feedback ---
+# --- Save on Submit ---
 if submitted:
     new_entry = pd.DataFrame({
         "timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
@@ -64,13 +64,29 @@ if submitted:
     all_feedback.to_csv(feedback_file, index=False)
     st.success("Thank you for your feedback!")
 
-    st.markdown("### Recent Feedback")
+# --- Display Feedback as Testimonials ---
+try:
+    feedback_df = pd.read_csv(feedback_file)
+    if not feedback_df.empty:
+        st.markdown("### What People Are Saying")
 
-    for _, row in all_feedback.tail(5).iterrows():
-        st.markdown(f"""
-        <div style='background-color:#f9f9f9; padding:1rem; border-radius:16px; margin-bottom:1rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);'>
-        <strong>{row['role']}</strong> — <span style='font-size: 0.85rem; color: gray;'>{row['timestamp']}</span>
-        <br>{row['feedback']}
-        </div>
-        """, unsafe_allow_html=True)
+        for _, row in feedback_df.tail(5).iterrows():
+            st.markdown(f"""
+            <div style='
+                background-color: #ffffff;
+                border: 1px solid #eee;
+                padding: 2rem;
+                margin-bottom: 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);'>
+
+                <div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
+                <div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
+                <div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>
+                    “{row['feedback']}”
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+except FileNotFoundError:
+    st.info("No feedback has been submitted yet.")
