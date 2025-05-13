@@ -71,22 +71,11 @@ try:
         st.markdown("### What People Are Saying")
 
         for _, row in feedback_df.tail(5).iterrows():
-            testimonial_html = f"""
-                <div style='
-                    background-color: #ffffff;
-                    border: 1px solid #eee;
-                    padding: 2rem;
-                    margin-bottom: 1.5rem;
-                    border-radius: 12px;
-                    box-shadow: 0 2px 6px rgba(0,0,0,0.05);'>
-
-                    <div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
-                    <div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
-                    <div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>
-                        “{row['feedback'].strip()}”
-                    </div>
-                </div>
-            """
+            testimonial_html = f"""<div style='background-color: #ffffff; border: 1px solid #eee; padding: 2rem; margin-bottom: 1.5rem; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);'>
+<div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
+<div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
+<div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>“{row['feedback'].strip()}”</div>
+</div>"""
             st.markdown(testimonial_html, unsafe_allow_html=True)
 
 except FileNotFoundError:
