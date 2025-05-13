@@ -9,21 +9,13 @@ st.set_page_config(
 
 st.sidebar.markdown("### Try LocaliSense")
 
-# --- Global Styling for Threads Theme + Georgia Font ---
+# --- Styling ---
 st.markdown("""
     <style>
         html, body, textarea, input, [class^="st-"], [class*="stMarkdown"], .main {
             font-family: 'Georgia', serif !important;
             background-color: #ffffff;
             color: #111111;
-        }
-
-        .main h1, .main h2, .main h3, .main h4 {
-            font-family: 'Georgia', serif !important;
-        }
-
-        .markdown-text-container {
-            font-family: 'Georgia', serif !important;
         }
 
         .stButton>button {
@@ -82,10 +74,9 @@ with st.form("localization_form"):
     language = st.selectbox("Language", ["English", "Hindi", "Spanish"])
 
     submitted = st.form_submit_button("Localize Summary")
-
     st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Localization Logic ---
+# --- Civic Context + Analogy Logic ---
 def civic_data_lookup(country):
     db = {
         "India": "NEP 2020 aims to make education localized and multidisciplinary.",
@@ -94,14 +85,34 @@ def civic_data_lookup(country):
     }
     return db.get(country, "")
 
-def mock_localize(summary, country, language, education):
-    localized_example = {
-        "English": "Example: Like when drought hits farmers in your region.",
-        "Hindi": "उदाहरण: जैसे सूखा आपके इलाके की फसलें बर्बाद कर देता है।",
-        "Spanish": "Ejemplo: como cuando la sequía afecta los cultivos en tu región."
+def tone_scaled_analogy(education, language):
+    analogies = {
+        "basic": {
+            "English": "Example: Like when drought hits farmers in your region.",
+            "Hindi": "उदाहरण: जैसे सूखा आपके इलाके की फसलें बर्बाद कर देता है।",
+            "Spanish": "Ejemplo: como cuando la sequía arruina los cultivos en tu zona."
+        },
+        "intermediate": {
+            "English": "Example: Think of urban schools struggling to stay open after climate disruptions.",
+            "Hindi": "उदाहरण: जैसे शहरों के स्कूल मौसम की वजह से बंद हो जाते हैं।",
+            "Spanish": "Ejemplo: como cuando las escuelas urbanas cierran por fenómenos climáticos."
+        },
+        "advanced": {
+            "English": "Example: Similar to how regional policies struggle to adapt to shifting environmental baselines.",
+            "Hindi": "उदाहरण: जैसे क्षेत्रीय नीतियाँ बदलते पर्यावरणीय मानकों से तालमेल नहीं बैठा पाती हैं।",
+            "Spanish": "Ejemplo: como cuando las políticas regionales no se adaptan al cambio ambiental."
+        }
     }
+    return analogies.get(education, {}).get(language, "")
+
+# --- Full Localization ---
+def mock_localize(summary, country, language, education):
     context = civic_data_lookup(country)
-    return f"{summary}\n\n[Context: {context}]\n\n{localized_example.get(language, '')}"
+    analogy = tone_scaled_analogy(education, language)
+    source = f"\n\n_Source: Ministry of Education, {country}_" if country == "India" else \
+             f"\n\n_Source: National Education Policy, {country}_"
+
+    return f"{summary}\n\n[Context: {context}]\n\n{analogy}{source}"
 
 # --- Output ---
 if submitted:
@@ -119,3 +130,8 @@ if submitted:
         data=localized_result,
         file_name="localized_summary.txt"
     )
+
+    # --- Feedback Prompt ---
+    st.markdown("### Did this feel relevant?")
+    relevance = st.radio("Your feedback helps us improve:", ["👍 Yes", "👎 Not really"], horizontal=True)
+    st.success("Thanks for your feedback!") if relevance else None
