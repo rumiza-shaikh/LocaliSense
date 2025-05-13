@@ -7,7 +7,7 @@ st.sidebar.markdown("### Feedback")
 
 feedback_file = "feedback_log.csv"
 
-# --- Style ---
+# --- Styling ---
 st.markdown("""
     <style>
         html, body, [class*="css"], textarea, input {
@@ -47,7 +47,7 @@ with st.form("feedback_form"):
         submitted = st.form_submit_button("Submit")
         st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Save on Submit ---
+# --- Save feedback if submitted ---
 if submitted:
     new_entry = pd.DataFrame({
         "timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
@@ -72,20 +72,20 @@ try:
 
         for _, row in feedback_df.tail(5).iterrows():
             st.markdown(f"""
-            <div style='
-                background-color: #ffffff;
-                border: 1px solid #eee;
-                padding: 2rem;
-                margin-bottom: 1.5rem;
-                border-radius: 12px;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.05);'>
+                <div style='
+                    background-color: #ffffff;
+                    border: 1px solid #eee;
+                    padding: 2rem;
+                    margin-bottom: 1.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.05);'>
 
-                <div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
-                <div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
-                <div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>
-                    “{row['feedback']}”
+                    <div style='font-size: 0.9rem; color: #777;'>{row['timestamp']}</div>
+                    <div style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>{row['role']}</div>
+                    <div style='font-size: 1.05rem; font-style: italic; line-height: 1.6;'>
+                        “{row['feedback']}”
+                    </div>
                 </div>
-            </div>
             """, unsafe_allow_html=True)
 
 except FileNotFoundError:
