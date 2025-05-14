@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-import os
-if os.path.exists("feedback_log.csv"):
-    os.remove("feedback_log.csv")
-
 
 st.set_page_config(page_title="Feedback", layout="wide")
 st.sidebar.markdown("### Feedback")
