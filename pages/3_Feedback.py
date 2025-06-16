@@ -50,7 +50,6 @@ with st.form("feedback_form"):
 # --- Save Feedback ---
 if submitted:
     new_entry = pd.DataFrame({
-        "timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
         "role": [role],
         "feedback": [feedback]
     })
